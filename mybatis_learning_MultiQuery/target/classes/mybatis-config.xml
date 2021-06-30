@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 1.properties属性引入外部配置文件 -->
+    <!--    <properties resource="mybatis-config.properties">-->
+    <!--        &lt;!&ndash; property里面的属性全局均可使用 &ndash;&gt;-->
+    <!--        <property name="jdbc.username" value="root"/>-->
+    <!--        <property name="jdbc.password" value="root"/>-->
+    <!--        &lt;!&ndash; 启用默认值特性，这样${}拼接符才可以设置默认值 &ndash;&gt;-->
+    <!--        <property name="org.apache.ibatis.parsing.PropertyParser.enable-default-value" value="true"/>-->
+    <!--    </properties>-->
+
+    <!--    &lt;!&ndash; 2.全局配置参数 &ndash;&gt;-->
+    <!--    <settings>-->
+    <!--        &lt;!&ndash; 指定 MyBatis 所用日志的具体实现，未指定时将自动查找 &ndash;&gt;-->
+    <!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+    <!--        &lt;!&ndash; 开启自动驼峰命名规则（camel case）映射 &ndash;&gt;-->
+    <!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+    <!--        &lt;!&ndash; 开启延迟加载开关 &ndash;&gt;-->
+    <!--        <setting name="lazyLoadingEnabled" value="true"/>-->
+    <!--        &lt;!&ndash; 将积极加载改为消极加载（即按需加载）,默认值就是false &ndash;&gt;-->
+    <!--        <setting name="aggressiveLazyLoading" value="false"/>-->
+    <!--        &lt;!&ndash; 打开全局缓存开关（二级环境），默认值就是true &ndash;&gt;-->
+    <!--        <setting name="cacheEnabled" value="true"/>-->
+    <!--    </settings>-->
+
+    <!--    &lt;!&ndash; 3.别名设置 &ndash;&gt;-->
+    <!--    <typeAliases>-->
+    <!--        <typeAlias alias="user" type="com.pjb.mybatis.po.User"/>-->
+    <!--        <typeAlias alias="teacher" type="com.pjb.mybatis.po.Teacher"/>-->
+    <!--        <typeAlias alias="integer" type="java.lang.Integer"/>-->
+    <!--    </typeAliases>-->
+
+    <!--    &lt;!&ndash; 4.类型转换器 &ndash;&gt;-->
+    <!--    <typeHandlers>-->
+    <!--        &lt;!&ndash; 一个简单的类型转换器 &ndash;&gt;-->
+    <!--        <typeHandler handler="com.pjb.mybatis.example.ExampleTypeHandler"/>-->
+    <!--    </typeHandlers>-->
+
+    <!-- 5.对象工厂 -->
+    <!--    <objectFactory type="com.pjb.mybatis.example.ExampleObjecFactory">-->
+    <!--        &lt;!&ndash; 对象工厂注入参数 &ndash;&gt;-->
+    <!--        <property name="someProperty" value="100"/>-->
+    <!--    </objectFactory>-->
+
+    <!-- 6.插件 -->
+    <!--    <plugins>-->
+    <!--        <plugin interceptor="com.pjb.mybatis.example.ExamplePlugin">-->
+    <!--            <property name="someProperty" value="100"/>-->
+    <!--        </plugin>-->
+    <!--    </plugins>-->
+
+    <!-- 7.environments数据库环境配置 -->
+    <!-- 和Spring整合后environments配置将被废除 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- 使用JDBC事务管理 -->
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 8.加载映射文件 -->
+    <mappers>
+        <mapper resource="cn/bux/mapper/EmpDAO.xml"/>
+        <mapper resource="cn/bux/mapper/InfoDAO.xml"/>
+        <mapper resource="cn/bux/mapper/PersonDAO.xml"/>
+        <mapper resource="cn/bux/mapper/DeptDAO.xml"/>
+        <mapper resource="cn/bux/mapper/StudentDAO.xml"/>
+        <mapper resource="cn/bux/mapper/CourseDAO.xml"/>
+    </mappers>
+</configuration>

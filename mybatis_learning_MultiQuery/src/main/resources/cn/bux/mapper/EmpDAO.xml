@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bux.dao.EmpDAO">
+
+    <select id="findById" parameterType="Integer" resultType="cn.bux.entity.Emp">
+        select * from t_emp where id = #{id}
+    </select>
+
+
+    <update id="update" parameterType="cn.bux.entity.Emp">
+        update t_emp
+        <set>
+            <if test="name!=null and name!=' '">
+                name=#{name},
+            </if>
+            age=#{age},bir=#{birthady},depid=#{depid}
+        </set>
+            where id =#{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        delete from t_emp
+        where id=#{id}
+    </delete>
+
+<!--    动态SQL片段-->
+    <sql id="empQuery">
+         id,name,age,bir,deptid
+    </sql>
+
+    <select id="findAll" resultType="cn.bux.entity.Emp">
+        select
+        <include refid="empQuery"/>
+        from t_emp
+    </select>
+
+<!--    模糊查询-->
+    <select id="findLikeByName" parameterType="String" resultType="cn.bux.entity.Emp">
+        select
+        <include refid="empQuery"/>
+        from t_emp
+        where name like
+        concat('%',#{name},'%')
+    </select>
+
+<!--    分页查询-->
+    <select id="QueryByPage" resultType="cn.bux.entity.Emp">
+        select
+        <include refid="empQuery"/>
+        from t_emp
+        limit #{start},#{rows}
+    </select>
+
+<!--    查询总条数-->
+    <select id="queryTotalCounts" resultType="Long">
+        select count(id) from t_emp;
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bux.dao.CourseDAO">
+
+    <resultMap id="courseMap" type="cn.bux.entity.Course" >
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+
+        <collection property="students" javaType="list" ofType="cn.bux.entity.Student">
+            <id column="sid" property="id"/>
+            <result column="sname" property="name"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="queryCourseAllById" parameterType="Integer" resultMap="courseMap">
+        SELECT c.id,c.name,s.id sid,s.name sname FROM t_course c
+        LEFT JOIN t_student_course ts
+        ON c.id=ts.cid
+        LEFT JOIN t_student s
+        ON ts.sid=s.id
+        WHERE c.id = #{id}
+    </select>
+
+</mapper>

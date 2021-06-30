@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bux.dao.EmpDAO">
+    <select id="findById" parameterType="String" resultType="cn.bux.entity.Emp">
+        select id,name,path,salary,age from t_emp where id =#{id}
+    </select>
+
+    <select id="findByAgeAndSalary" resultType="cn.bux.entity.Emp">
+        select  id,name,path,age,salary from t_emp
+        where age=#{age} and salary=#{salary}
+    </select>
+
+    <select id="findAll" resultType="cn.bux.entity.Emp">
+        select id,name,path,salary,age from t_emp;
+    </select>
+
+    <update id="update" parameterType="cn.bux.entity.Emp">
+        update t_emp set name =#{name},path=#{path} where id =#{id}
+    </update>
+
+    <delete id="delete" parameterType="String" >
+        delete from t_emp where id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="cn.bux.entity.Emp">
+        insert t_emp values (#{id},#{name},#{path},#{salary},#{age})
+    </insert>
+</mapper>
